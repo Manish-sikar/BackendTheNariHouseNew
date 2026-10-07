@@ -32,6 +32,28 @@ const customerSchema = new mongoose.Schema(
       required: true,
     },
 
+    // Profile
+    gender: {
+      type: String,
+      default: "",
+    },
+
+    dob: {
+      type: String,
+      default: "",
+    },
+
+    alternateMobile: {
+      type: String,
+      default: "",
+    },
+
+    profileImage: {
+      type: String,
+      default: "",
+    },
+
+    // Address
     address: {
       type: String,
       default: "",
@@ -52,9 +74,26 @@ const customerSchema = new mongoose.Schema(
       default: "",
     },
 
+    // Preferences
+    newsletter: {
+      type: Boolean,
+      default: true,
+    },
+
     status: {
       type: Number,
-      default: 1, // 1 = Active, 0 = Inactive
+      default: 1,
+    },
+
+    // Forgot password OTP
+    resetOtp: {
+      type: String,
+      default: null,
+    },
+
+    resetOtpExpiry: {
+      type: Date,
+      default: null,
     },
   },
   {

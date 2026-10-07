@@ -195,6 +195,12 @@ const {
 const {
   CustomerRegister,
   CustomerLogin,
+  changePassSendOtp,
+  CustRegisterverifyOtp,
+  forgotChangePasswordCust,
+  GetCustomerProfile,
+  UpdateCustomerProfile,
+  ChangeCustomerPassword,
 } = require("../controller/customerAuthController");
 const customerAuth = require("../middleware/customerAuth");
 const {
@@ -346,9 +352,27 @@ router.delete("/loan_details/:id", deleteLoanData);
 router.put("/loan_details/chanege_status", changeStatusLoanData);
 
 /// foorgot password
-router.post("/changePassSendOtp", forgotPasswordSendOtp);
-router.post("/verifyOtp", UserRegisterverifyOtp);
-router.post("/resetPassword", forgotChangePasswordUser);
+router.post("/changePassSendOtp", changePassSendOtp);
+router.post("/verifyOtp", CustRegisterverifyOtp);
+router.post("/resetPassword", forgotChangePasswordCust);
+router.get(
+  "/profile",
+  customerAuth,
+  GetCustomerProfile
+);
+
+router.put(
+  "/profile",
+  customerAuth,
+  upload.single("profileImage"),
+  UpdateCustomerProfile
+);
+
+router.put(
+  "/change-password",
+  customerAuth,
+  ChangeCustomerPassword
+);
 
 // get report of form
 router.post("/reportStatus", getReportStatus);
@@ -483,8 +507,12 @@ router.delete("/wishlist",customerAuth, clearWishlist);
 router.post("/checkout/create", customerAuth, createCheckoutOrder);
 
 router.post("/checkout/verify-payment", customerAuth, verifyCheckoutPayment);
-
-router.post("/customer/register", CustomerRegister);
+ 
+router.post(
+  "/customer/register",
+  upload.single("profileImage"),
+  CustomerRegister
+);
 
 router.post("/customer/login", CustomerLogin);
 

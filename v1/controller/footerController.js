@@ -76,6 +76,67 @@ const updateFooterData = async (req, res) => {
   }
 };
 
+// create new footer data
+// const updateFooterData = async (req, res) => {
+//   try {
+//     const {
+//       footer_title,
+//       footer_desc,
+//       footer_social_details,
+//       footer_our_services,
+//       footer_other_services,
+//       footer_banking_services,
+//       footer_address1,
+//       footer_address2,
+//       footer_email,
+//     } = req.body;
+
+//     // Validate required fields
+//     if (
+//       !footer_title ||
+//       !footer_desc ||
+//       !footer_social_details ||
+//       !footer_our_services ||
+//       !footer_other_services ||
+//       !footer_banking_services ||
+//       !footer_address1 ||
+//       !footer_address2 ||
+//       !footer_email
+//     ) {
+//       return res.status(400).json({
+//         err: "All fields are required: footer_title, footer_desc, footer_social_details, footer_our_services, footer_other_services, footer_banking_services, footer_address1, footer_address2, and footer_email.",
+//       });
+//     }
+
+//     // Validate email format
+//     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(footer_email)) {
+//       return res.status(400).json({ err: "Invalid email address." });
+//     }
+
+//     // Create the new footer document
+//     const newFooterData = await FooterModel.create({
+//       footer_title,
+//       footer_desc,
+//       footer_social_details,
+//       footer_our_services,
+//       footer_other_services,
+//       footer_banking_services,
+//       footer_address1,
+//       footer_address2,
+//       footer_email,
+//     });
+
+//     return res.status(201).json({
+//       message: "Footer details created successfully!",
+//       data: newFooterData,
+//     });
+//   } catch (error) {
+//     console.error("Error inserting footer data:", error);
+//     return res.status(500).json({
+//       err: "An error occurred, unable to create footer details.",
+//     });
+//   }
+// };
 
 
 

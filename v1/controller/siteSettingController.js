@@ -79,6 +79,86 @@ const updateDataSite = async (req, res) => {
   }
 };
 
+// create new site data
+// const updateDataSite = async (req, res) => {
+//   try {
+//     const { _id, site_name, title, mobile_no, email, Address } = req.body;
+
+//     // Common validation (same for insert and update)
+//     if (!email || !site_name || !title || !Address || !mobile_no) {
+//       return res.status(400).json({ error: "All fields are required!" });
+//     }
+
+//     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+//       return res.status(400).json({ error: "Invalid email address." });
+//     }
+
+//     if (!/^\d{10}$/.test(mobile_no)) {
+//       return res.status(400).json({ error: "Invalid mobile number format." });
+//     }
+
+//     if (_id && !mongoose.isValidObjectId(_id)) {
+//       return res.status(400).json({ error: "Invalid site id." });
+//     }
+
+//     const siteData = { email, site_name, title, Address, mobile_no };
+
+//     // Process site_logo if provided (optional chaining avoids crash when req.files is undefined)
+//     if (req.files?.site_logo?.[0]) {
+//       const siteLogoBuffer = await sharp(req.files.site_logo[0].buffer)
+//         .resize(80, 80)
+//         .toBuffer();
+
+//       siteData.site_logo = await uploadToS3(
+//         siteLogoBuffer,
+//         `site_logo_${uuidv4()}.jpg`,
+//         "image/jpeg"
+//       );
+//     }
+
+//     // Process favicon if provided
+//     if (req.files?.favicon?.[0]) {
+//       siteData.favicon = await uploadToS3(
+//         req.files.favicon[0].buffer,
+//         `favicon_${uuidv4()}.ico`,
+//         "image/x-icon"
+//       );
+//     }
+
+//     let result;
+//     let message;
+//     let statusCode;
+
+//     if (_id) {
+//       // UPDATE
+//       result = await SiteModel.findByIdAndUpdate(_id, siteData, { new: true });
+
+//       if (!result) {
+//         return res.status(404).json({ error: "Site data not found." });
+//       }
+
+//       message = "Site data updated successfully!";
+//       statusCode = 200;
+//     } else {
+//       // INSERT
+//       result = await SiteModel.create(siteData);
+//       message = "Site data created successfully!";
+//       statusCode = 201;
+//     }
+
+//     return res.status(statusCode).json({
+//       success: true,
+//       message,
+//       data: result,
+//     });
+//   } catch (error) {
+//     console.error("Error saving site data:", error);
+//     return res
+//       .status(500)
+//       .json({ success: false, error: "An error occurred, unable to save site data." });
+//   }
+// };
+
 // Get Site Data
 const getDataSite = async (req, res) => {
   try {
