@@ -86,21 +86,38 @@ const s3 = new AWS.S3({
 });
 
 // Upload file/image to S3
-const uploadToS3 = async (buffer, fileName, mimeType) => {
+const uploadToS3 = async (
+  buffer,
+  fileName,
+  mimeType,
+  folder = "customers"
+) => {
   try {
+
     const params = {
       Bucket: process.env.AWS_BUCKET_NAME,
-      Key: `customers/${fileName}`,
+
+      Key: `${folder}/${fileName}`,
+
       Body: buffer,
+
       ContentType: mimeType,
+
       ACL: "public-read",
     };
 
-    const { Location } = await s3.upload(params).promise();
+    const { Location } =
+      await s3.upload(params).promise();
 
     return Location;
+
   } catch (error) {
-    console.error("S3 Upload Error:", error);
+
+    console.error(
+      "S3 Upload Error:",
+      error
+    );
+
     throw error;
   }
 };

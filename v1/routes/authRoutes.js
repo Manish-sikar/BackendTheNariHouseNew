@@ -207,6 +207,15 @@ const {
   getHeaderSettings,
   updateHeaderSettings,
 } = require("../controller/headerSettingsController");
+const {
+  AddHomeSection,
+  GetHomeSections,
+  GetAllHomeSections,
+  GetHomeSectionById,
+  UpdateHomeSection,
+  DeleteHomeSection,
+  ChangeHomeSectionStatus,
+} = require("../controller/homeSectionController");
 // const storage = multer.diskStorage({
 //     destination: (req, file, cb) => {
 //       cb(null, process.env.IMG_DIR_PATH); // Specify the directory for file storage
@@ -424,10 +433,18 @@ router.get("/products/:id", getProductById);
 router.put("/products", upload.array("productImages", 10), updateProduct);
 router.delete("/products/:id", deleteProduct);
 router.put("/products/change-status", changeProductStatus);
-router.post("/categories", addCategory);
+router.post(
+  "/categories",
+  upload.single("image"),
+  addCategory
+);
 router.get("/categories", getCategories);
-router.get("/categories/:id", getCategoryById);
-router.put("/categories/:id", updateCategory);
+router.get("/categories/:id", getCategoryById); 
+router.put(
+  "/categories/:id",
+  upload.single("image"),
+  updateCategory
+);
 router.delete("/categories/:id", deleteCategory);
 router.post("/subcategories", addSubCategory);
 router.get("/subcategories", getSubCategories);
@@ -532,5 +549,61 @@ router.get("/header-settings", getHeaderSettings);
 router.put("/header-settings", updateHeaderSettings);
 router.get("/wishlist/count", customerAuth, getWishlistCount);
 router.get("/cart/count", customerAuth, getCartCount);
+
+// ==========================================
+// HOME SECTION APIs
+// ==========================================
+
+// Frontend - Active Home Sections
+router.get(
+  "/home-sections",
+  GetHomeSections
+);
+
+
+// Admin - All Home Sections
+router.get(
+  "/home-sections/all",
+  GetAllHomeSections
+);
+
+
+// Admin - Get Single
+router.get(
+  "/home-sections/:id",
+  GetHomeSectionById
+);
+
+
+// Admin - Add
+router.post(
+  "/home-sections",
+  upload.any(),
+  AddHomeSection
+);
+ 
+
+ 
+// Admin - Update
+router.post(
+  "/home-sections/:id", 
+   upload.any(),
+  UpdateHomeSection
+);
+
+
+// Admin - Delete
+router.delete(
+  "/home-sections/:id",
+  DeleteHomeSection
+);
+
+
+
+// Admin - Change Status
+router.put(
+  "/home-sections/change-status",
+  ChangeHomeSectionStatus
+);
 
 module.exports = router;

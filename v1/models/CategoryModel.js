@@ -14,9 +14,14 @@ const categorySchema = new mongoose.Schema(
       default: "",
     },
 
+    image: {
+      type: String,
+      default: "",
+    },
+
     status: {
       type: Number,
-      default: 1, // 1 = Active, 0 = Inactive
+      default: 1,
     },
   },
   {
