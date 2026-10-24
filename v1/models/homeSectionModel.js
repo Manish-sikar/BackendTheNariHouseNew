@@ -1,44 +1,59 @@
 const mongoose = require("mongoose");
 
-const homeSectionItemSchema =
-  new mongoose.Schema(
-    {
-      title: {
-        type: String,
-        default: "",
-        trim: true,
-      },
 
-      description: {
-        type: String,
-        default: "",
-        trim: true,
-      },
-
-      icon: {
-        type: String,
-        default: "",
-      },
-
-      image: {
-        type: String,
-        default: "",
-      },
-
-      link: {
-        type: String,
-        default: "",
-      },
-
-      buttonText: {
-        type: String,
-        default: "",
-      },
+const homeSectionItemSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      default: "",
+      trim: true,
     },
-    {
-      _id: true,
-    }
-  );
+
+    description: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
+    icon: {
+      type: String,
+      default: "",
+    },
+
+    image: {
+      type: String,
+      default: "",
+    },
+
+    link: {
+      type: String,
+      default: "",
+    },
+
+    buttonText: {
+      type: String,
+      default: "",
+    },
+
+    // City name for each testimonial
+    location: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
+    // Rating for each testimonial
+    rating: {
+      type: Number,
+      default: 5,
+      min: 1,
+      max: 5,
+    },
+  },
+  {
+    _id: true,
+  }
+);
 
 
 const homeSectionSchema =
